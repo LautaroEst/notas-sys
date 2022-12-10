@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[autostyle=false,style=american]{csquotes}
+\MakeOuterQuote{"}
+
+
+% Matemática:
+\usepackage{marvosym}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Gráficos e imágenes:
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Formato:
+\usepackage[left=2.3cm,right=2.3cm,top=2cm,bottom=2cm]{geometry}
+
+% Tikz:
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning,babel}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{array}
+\usepackage{tabularray}
+\allowdisplaybreaks
+
+% Referencias:
+\usepackage{biblatex}
+\addbibresource{01_señales/references.bib}
+\addbibresource{02_sistemas/references.bib}
+\addbibresource{03_series_fourier/references.bib}
+\addbibresource{04_transformada_fourier/references.bib}
+\addbibresource{05_muestreo/references.bib}
+\addbibresource{06_dft/references.bib}
+\addbibresource{07_espectrograma/references.bib}
+\addbibresource{08_filtros/references.bib}
+
+% Outline:
+\usepackage[bookmarks]{hyperref}
+
+
+
+%% COMANDOS %%
+
+% Símbolos
+\newcommand{\Keyboardsym}{\Keyboard \hspace{.3em}}
+\newcommand{\Realpart}[1]{\mathfrak{Re}\left\{#1\right\}}
+\newcommand{\Impart}[1]{\mathfrak{Im}\left\{#1\right\}}
+
+% Teoremas, ejercicios, contadores, etc
+\newcounter{ejercicioi}
+\newcommand{\ejercicios}{\setcounter{ejercicioi}{0}}
+\newenvironment{ejercicio}{
+    \incisos
+    \vspace{0.5cm}
+    \hrule
+    \vspace{0.3cm}
+    \setcounter{equation}{0}
+    \refstepcounter{ejercicioi}
+    \noindent
+    {\bf \arabic{ejercicioi}.} 
+}{}
+\newcounter{incisoi}[ejercicioi]
+\newcommand{\incisos}{\setcounter{incisoi}{0}}
+\newcommand{\inciso}{
+    \vspace{0.2cm}
+    \refstepcounter{incisoi} \noindent (\textbf{\alph{incisoi}})~
+}
+
+% Title page
+\newcommand{\mytitle}[1]{
+    \begin{titlepage}
+        \centering
+        \vspace*{10em}
+        \LARGE\textsc{Notas de Señales y Sistemas} \\[5em]
+        \Large\textsc{#1} \\
+        \vspace*{10em}
+        \newpage
+    \end{titlepage}       
+    \tableofcontents
+    \newpage
+}
+
+
+% Unidad temática
+\newcommand{\unidadtem}{1}
+
+\begin{document}
+
+\ifcase%
+    \unidadtem{} UNIDAD TEMÁTICA NO SELECCIONADA!!
+    \or \input{01_señales/main.tex}
+    \or \input{02_sistemas/main.tex}
+    \or \input{03_series_fourier/main.tex}
+    \or \input{04_transformada_fourier/main.tex}
+    \or \input{05_muestreo/main.tex}
+    \or \input{06_dft/main.tex}
+    \or \input{07_espectrograma/main.tex}
+    \or \input{08_filtros/main.tex}
+    \else UNIDAD TEMÁTICA NO SELECCIONADA!!
+\fi
+
+\printbibliography
+\addcontentsline{toc}{section}{Bibliografía}
+
+\end{document}
