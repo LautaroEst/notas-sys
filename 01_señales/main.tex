@@ -1,7 +1,181 @@
 \mytitle{Señales de Tiempo Continuo y Discreto}
 
+\section{Introducción}
+
+El término "señal" se utiliza en este contexto para referirse a cualquier función matemática de una o más variables independientes que contenga información del mundo físico. Es decir que es una representación matemática de una porción de la realidad. Por ejemplo:
+\begin{itemize}
+    \item La tensión en los bornes de un capacitor es una cantidad escalar que sirve para representar de una manera simplificada la distribución del campo eléctrico en una porción del universo (en este caso, los extremos del capacitor). En un modelo de parámetros concentrados, esta cantidad depende del tiempo $t$ y se representa con una función $v(t)$ que puede adoptar valores reales.
+    \item Otra magnitud importante en ingeniería es la temperatura y a pesar de ser consecuencia del comportamiento global de un conjunto de partículas, se representa con una única magnitud escalar. Podría ser de interés, por ejemplo, representar la temperatura de una varilla de metal con una función matemática $T(x)$ en función de la posición $x$ en donde se esté tomando la medición. Dependiendo de las unidades que se esté utilizando, este valor puede ser positivo o negativo pero forma parte de un dominio acotado inferiormente ya que no hay temperaturas inferiores al cero absoluto.
+    \item Una imagen digital a color es un arreglo bidimensional de tres números $(p_R, p_G, p_B)$ que toman valores discretos generalmente entre 0 y 255 (8-bits), y también es una señal. En este caso, la función matemática que representa el estado de la porción del universo en donde está almacenada esta imagen (posiblemente, un conjunto de flip-flops de la memoria RAM de la computadora) es $f(x,y) \in \{0,\ldots,255\} \times \{0,\ldots,255\} \times \{0,\ldots,255\}$, con $x$ e $y$ la posición de cada píxel. 
+\end{itemize}
+
+Como puede apreciarse, esta definición es muy amplia y no importa realmente dar más especificaciones que lo dicho hasta ahora. Sin embargo, sí es importante definir qué son las señales de tiempo continuo y tiempo discreto, que son las que vamos a estudiar en la materia.
 
 \section{Señales de Tiempo Continuo}
 
+\begin{definition}[Señal de Tiempo Continuo]
+    \label{def:ct_signal}
+    Sea $\mathcal{I} \subseteq \R$ un intervalo real que puede incluir o no a toda la recta real. Una señal de tiempo continuo es una función $x : \mathcal{I}  \rightarrow \C$ que toma un valor $t \in \mathcal{I}$ y devuelve un valor complejo $x(t)$. 
+\end{definition}
+
+Las señales de tiempo continuo se interpretan como una representación de un fenómeno físico que depende de una única variable. \emph{Generalmente} esta variable es el tiempo, aunque también puede ser otra cosa como la posición en la varilla del ejemplo de la introducción. Para simplificar notación, vamos a hablar de "la señal de tiempo continuo $x(t)$" o simplemente "la señal continua $x(t)$" para referirnos a la función $x$ definida en \ref{def:ct_signal}. Veamos algunos ejemplos.
+
+\begin{example}[Escalón]
+    La función 
+    \begin{equation*}
+        u(t) = \begin{cases}
+            1 & \mbox{si } t \geq 0 \\
+            0 & \mbox{si } t < 0
+        \end{cases}
+    \end{equation*}
+    (figura \ref{fig:step_function}) se conoce como \emph{función escalón} y es una señal de tiempo continuo definida sobre toda la recta real. El valor que toma la función en $t = 0$ no va a ser relevante para nosotres, y muchas veces la definición varía dependiendo de la bibliografía. 
+\end{example}
+
+\begin{example}[Pulso cuadrado]
+    La función 
+    \begin{equation*}
+        s(t) = \begin{cases}
+            1 & \mbox{si } -\frac{T}{2} \leq t \leq \frac{T}{2} \\
+            0 & \mbox{si } t < -\frac{T}{2} \mbox{ o } t > \frac{T}{2}
+        \end{cases}
+    \end{equation*}
+    (figura \ref{fig:square_pulse}) es un ejemplo de un \emph{pulso cuadrado} centrado en el origen y de ancho $T$. Suele definirse sobre toda la recta real y se utiliza mucho en comunicaciones digitales. 
+\end{example}
+
+\begin{example}[Exponencial compleja y derivados]
+    La función $e^{j \omega t}$ se conoce como \emph{exponencial compleja} de frecuencia $\omega \in \R$ (figura \ref{fig:complex_expontential}) y está definida sobre toda la recta real. Es importante recordar que esta función cumple con la relación de Euler:
+    \begin{equation*}
+        e^{j \omega t} = \cos(\omega t) + j \sin(\omega t)
+    \end{equation*}
+    que la relacionan con las funciones trigonométricas $\cos(\omega t)$ y $\sin(\omega t)$.
+\end{example}
+
+\begin{example}[Exponencial real]
+    La función $e^{at}$ con $a\in \R$ se conoce como \emph{exponencial real} y está definida sobre toda la recta real.
+\end{example}
+
+\begin{example}[Sinc normalizada]
+    La función $\mathrm{sinc}(t) = \frac{\sin(\pi t)}{\pi t}$ se conoce como \emph{sinc normalizada} y está definida sobre toda la recta real.
+\end{example}
+
+\begin{example}[Sinc periódica normalizada]
+    La función 
+    \begin{equation*}
+        \mathrm{psinc}(t) = \begin{cases}
+            \frac{\sin(N \pi t)}{N \sin(\pi t)} & \mbox{si } t \in \Z \\[0.5em]
+            (-1)^{k(N-1)} & \mbox{si } t \in \Z
+        \end{cases}
+    \end{equation*}
+    se conoce como \emph{sinc periódica normalizada} (a veces también función de Dirichlet).
+    
+\end{example}
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \input{images/step_function}
+        \caption{Función escalón}
+        \label{fig:step_function}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \input{images/square_pulse}
+        \caption{Pulso cuadrado}
+        \label{fig:square_pulse}
+    \end{subfigure}
+    \vspace*{2em}
+
+    \begin{subfigure}[b]{.9\textwidth}
+        \centering
+        \input{images/complex_exponential}
+        \caption{Exponencial compleja}
+        \label{fig:complex_expontential}
+    \end{subfigure}
+\end{figure}
+
+\subsection{El problema de la Delta de Dirac de tiempo continuo}
+
+Desde un punto de vista más riguroso podría definirse que una señal temporal es cualquier función que pertenece al espacio vectorial de las funciones continuas a trozos definidas en un intervalo real. Esto trae ventajas como la posibilidad de definir operaciones en este espacio como el producto interno
+\begin{equation*}
+    \langle f, g \rangle = \int_{\mathcal{I}} f(t) g^*(t) \, dt
+\end{equation*}
+y la norma
+\begin{equation*}
+    \|f\| = \sqrt{\langle f, f \rangle} = \sqrt{\int_{\mathcal{I}} |f(t)|^2 \, dt}
+\end{equation*}
+la cual puede interpretarse como la "energía" de una señal.
+
+Además, es razonable pensar que una señal temporal (como cualquiera de las definidas en la sección anterior) sea una función continua a trozos, ya que la información que continen las señales temporales provienen de la naturaleza y los instrumentos de medición que se utilizan para generar dichas señales también tienen naturaleza continua. 
+
+Sin embargo, en muchos casos es muy útil definir una función de tiempo continuo que represente impulsos muy acotados en el tiempo. La manera de hacer esto en forma rigurosa es un tanto compleja, aunque el principio del que parte es bastante simple. La pregunta es: ¿cómo podemos definir una función que sea cero en todo el intervalo real excepto en un punto pero que a su vez tenga energía no nula?
+
+La respuesta está en que es posible definir lo que se conoce como el funcional Delta de Dirac, el cual toma una función $f$ y devuelve un valor real que representa la energía de la función $f$ en el punto $t_0 \in \mathcal{I}$:
+\begin{equation*}
+    f(t_0) = \int_{\mathcal{I}} f(t) \delta_{t_0}(t) \, dt
+\end{equation*}
+El problema es que no hay ninguna función continua a trozos $\delta_{t_0}(t)$ que cumpla con la ecuación anterior. Sin embargo, suele decirse laxamente que hay una señal llamada "delta de Dirac" que es la necesaria para cumplir con la ecuación anterior. Intiutivamente, esta señal debería cumplir con las siguientes propiedades:
+\begin{enumerate}
+    \item $\delta_{t_0}(t) = 0$ para todo $t \neq t_0$.
+    \item $\int_{\mathcal{I}} \delta_{t_0}(t) \, dt = 1$.
+    \item $\int_{\mathcal{D}} \delta_{t_0}(t) \, dt = 0$ para todo $\mathcal{D}$ que no contenga a $t_0$.
+    \item Da la sensación de que en $t=t_0$ el valor de esta función tendría que "ser infinito". 
+\end{enumerate}
+
+\subsection{Periodicidad de una señal de tiempo continuo}
+
+Dentro de las señales de tiempo continuo podemos distinguir a las señales periódicas de las no periódicas.
+
+\begin{definition}
+    \label{def:ct_periodic_signal}
+    Sea una señal continua $x(t)$ definida sobre toda la recta real. La señal $x(t)$ es periódica si y sólo si existe un $T \in \R$ tal que $x(t + T) = x(t)$ para todo $t \in \R$.
+\end{definition}
+
+Obviamente, una señal de tiempo continuo que no cumple con esta definición es no periódica. Notemos que es importante que las señales periódicas estén definidas sobre toda la recta real. Si esto no pasa, se pierde la noción de periodicidad porque en algún momento la señal "se deja de repetir". 
+
+\begin{example}[Suma de exponenciales complejas]
+    La exponencial compleja es una señal periódica y la suma de exponenciales complejas con el mismo período fundamental también lo son.
+\end{example}
+
+\begin{example}[Suma de señales periódicas]
+    La suma de dos periódicas continuas es periódica.
+\end{example}
+
+\begin{example}
+    
+\end{example}
+
+Energía de una señal periódica...
+
+\subsection{Paridad de una señal de tiempo continuo}
+
+Señales pares e impares...
+
+\subsection{Contracción temporal y desplazamiento en tiempo continuo}
+
+Mostrar que acá no hay problemas con la contracción temporal ni el desplazamiento. Ejemplificar cómo se modifica la delta cuando se la expande.
+
 \section{Señales de Tiempo Discreto}
 
+Definición, ejemplos como los anteriores pero sin el problema de la delta. Energía de una señal no periódica.
+
+\subsection{Periodicidad de una señal de tiempo discreto}
+
+Misma definición pero ejemplificar problemas de periodicidad.
+
+\begin{example}[Exponencial compleja]
+    Una exponencial compleja es periódica si y solo sí su frecuencia es un número racional.
+\end{example}
+
+\begin{example}[Suma de exponenciales complejas]
+    Sólo se neceista un conjunto finito de exponenciales para obtener una señal periódica discreta.
+\end{example}
+
+\subsection{Paridad de una señal de tiempo discreto}
+
+Funciones pares e impares...
+
+\subsection{Contracción temporal y desplazamiento en tiempo discreto}
+
+Problemas con las contracciones temporales en tiempo discreto.

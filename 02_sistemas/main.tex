@@ -1,1 +1,37 @@
 \mytitle{Caracterización de Sistemas}
+
+Introducción 
+
+\section{Clasificación de sistemas}
+
+Dar la clasificación de sistemas en general, sin distinguir entre discreto y continuo. Ejemplos de sistemas. Ejemplos de sistemas en cascada.
+
+\begin{definition}[Linearidad]
+    Se dice que un sistema $\mathcal{T}$ es lineal si y sólo si se cumple que $\mathcal{T}(a_1x_1(t) + a_2x_2(t)) = a_1\mathcal{T}(x_1(t)) + a_2\mathcal{T}(x_2(t))$ para todo $t \in \mathcal{I}$ y $a_1,a_2 \in \mathcal{R}$.    
+\end{definition}
+
+\begin{definition}[Invarianza en el tiempo]
+    Se dice que un sistema $\mathcal{T}$ es invariante en el tiempo si y sólo si la salida es la misma cuando se efectúa la operación desplazamiento antes o después de pasar por el sistema. Es decir, si $\mathcal{T}(\mathcal{D}_{\tau}(x)) = \mathcal{D}_{\tau}(\mathcal{T}(x))$.
+\end{definition}
+
+\begin{definition}[Memoria]
+    Se dice que un sistema $\mathcal{T}$ tiene memoria si y sólo si la salida en el instante $t$, $y(t)$, depende únicamente del valor de la entrada en ese momento. Es decir, si existe una función $f: \mathcal{Y} \rightarrow \mathcal{Y} : f(x(t)) = \mathcal{T}(x)(t) \; \forall t \in \mathcal{I}$.
+\end{definition}
+
+\begin{definition}[Causalidad]
+    Se dice que un sistema es causal si y sólo si su salida en el instante $t$, $y(t)$, depende únicamente del valor de la entrada en el instante $t$ o en instantes anteriores. Formalmente, un sistema es causal si y sólo si, para todo $t_0 \in \mathcal{I}$ se cumple que si $x_1(t) = x_2(t)$ para todo $t < t_0$, entonces $y_1(t) = y_2(t)$ para todo $t < t_0$.
+\end{definition}
+
+Es decir, que si dos entradas $x_1(t),x_2(t)$ son iguales hasta un instante $t_0$ y el sistema es causal, entonces las correspondientes salidas también serán iguales entre sí para todo hasta el instante $t_0$. Y esto es verdad para cualquier instante $t_0$.
+
+\begin{definition}[Invertibilidad]
+    Se dice que un sistema $\mathcal{T}$ es inversible si y sólo si existe una función $\mathcal{T}^{-1}: \mathcal{Y} \rightarrow \mathcal{X} : g(y(t)) = x(t) \; \forall t \in \mathcal{I}$.
+\end{definition}
+
+\begin{definition}[Estabilidad BIBO]
+    Se dice que un sistema $\mathcal{T}$ es estable BIBO (o, para abreviar, "estable") si y sólo si entradas acotadas generan salidas acotadas. Es decir, si y sólo si se cumple que: si existe una constante $B_1 > 0$ tal que $|x(t)| \leq B_1 \forall t \in \mathcal{I}_x$, entonces existe una constante $B_2 > 0$ tal que $|y(t)| \leq B_2 \forall t \in \mathcal{I}_y$.
+\end{definition}
+
+\section{Sistemas LTI}
+
+Definición de sistema LTI. Propiedades en genérico. 

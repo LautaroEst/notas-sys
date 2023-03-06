@@ -1,0 +1,18 @@
+\begin{tikzpicture}[scale=0.6,transform shape]
+    \begin{axis}[
+    	axis y line=center,
+    	axis x line=middle,
+    	xlabel={\Large $t$},ylabel={\Large $u(t)$},
+    	xmin=-2.9,xmax=2.9,
+    	ymin=-0.5,ymax=2,
+    	ticks=none
+    	]
+    	\addplot[
+    	black,
+    	ultra thick
+    	] coordinates {
+    	    (-2.5,0) (0,0) (0,1) (2,1)
+    	};
+        \node at (-0.4,1) {\large 1};
+    \end{axis}
+\end{tikzpicture}
