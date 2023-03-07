@@ -10,9 +10,33 @@ Dar la clasificación de sistemas en general, sin distinguir entre discreto y co
     Se dice que un sistema $\mathcal{T}$ es lineal si y sólo si se cumple que $\mathcal{T}(a_1x_1(t) + a_2x_2(t)) = a_1\mathcal{T}(x_1(t)) + a_2\mathcal{T}(x_2(t))$ para todo $t \in \mathcal{I}$ y $a_1,a_2 \in \mathcal{R}$.    
 \end{definition}
 
+\begin{example}
+    Ejemplo corto de sistema lineal.
+\end{example}
+
+\begin{example}
+    Ejemplo corto de sistema no lineal.
+\end{example}
+
+\begin{example}
+    Ejemplo de reconstrucción de la entrada a partir de la salida de un sistema lineal.
+\end{example}
+
 \begin{definition}[Invarianza en el tiempo]
     Se dice que un sistema $\mathcal{T}$ es invariante en el tiempo si y sólo si la salida es la misma cuando se efectúa la operación desplazamiento antes o después de pasar por el sistema. Es decir, si $\mathcal{T}(\mathcal{D}_{\tau}(x)) = \mathcal{D}_{\tau}(\mathcal{T}(x))$.
 \end{definition}
+
+\begin{example}
+    Ejemplo corto de sistema invariante en el tiempo.
+\end{example}
+
+\begin{example}
+    Ejemplo corto de sistema no invariante en el tiempo.
+\end{example}
+
+\begin{example}
+    Ejemplo de reconstrucción de la entrada a partir de la salida de un sistema invariante en el tiempo.
+\end{example}
 
 \begin{definition}[Memoria]
     Se dice que un sistema $\mathcal{T}$ tiene memoria si y sólo si la salida en el instante $t$, $y(t)$, depende únicamente del valor de la entrada en ese momento. Es decir, si existe una función $f: \mathcal{Y} \rightarrow \mathcal{Y} : f(x(t)) = \mathcal{T}(x)(t) \; \forall t \in \mathcal{I}$.
@@ -34,4 +58,56 @@ Es decir, que si dos entradas $x_1(t),x_2(t)$ son iguales hasta un instante $t_0
 
 \section{Sistemas LTI}
 
-Definición de sistema LTI. Propiedades en genérico. 
+\begin{definition}[Sistema LTI]
+    Un sistema es LTI si y sólo si es lineal e invariante en el tiempo.
+\end{definition}
+
+\begin{example}
+    Ejemplo corto de sistema LTI.
+\end{example}
+
+\begin{example}
+    Reconstrucción de la entrada a partir de la salida de un sistema LTI.
+\end{example}
+
+\subsection*{Propiedades de los sistemas LTI}
+
+\begin{property}[Reconstrucción de la salida]
+    Dado un conjunto de entradas $\mathcal{G} = \{x_1(t),\ldots,x_n(t)\}$, puedo obtener la salida de cualquier señal que sea combinación lineal de $\mathcal{G}$ y del que se obtiene de desplazar temporalmente cada una de las señales de $\mathcal{G}$.
+\end{property}
+
+Como caso particular de lo anterior se tiene lo siguiente:
+
+\begin{property}[Convolución]
+    Si se conoce la respuesta al impulso del sistema, es decir, salida para $\delta(t)$, es posible obtener cualquier salida del sistema a partir de la convolución de la entrada con la respuesta al impulso del sistema.
+\end{property}
+
+\begin{property}[Conexión de sistemas LTI]
+    La conexión en cascada, la suma y la conmutación de sistemas LTI también es un sistema LTI. 
+\end{property}
+
+\begin{property}[Respuesta a exponenciales en sistemas de tiempo continuo]
+    La respuesta de un sistema LTI de tiempo continuo y respuesta al impulso $h(t)$ a una señal exponencial $e^{st}, s\in \C$ es una señal exponencial escalada por un factor que depende únicamente de $s$. Por lo tanto, $e^{st}$ es un autovector del sistema, y su correspondiente autovalor es:
+    \begin{equation*}
+        H(s) := \int_{-\infty}^{\infty} h(t)e^{-st}dt
+    \end{equation*}
+\end{property}
+
+\begin{property}[Respuesta a exponenciales en sistemas de tiempo discreto]
+    La respuesta de un sistema LTI de tiempo discreto y respuesta al impulso $h(n)$ a una señal exponencial $z^{n}, z \in \C$ es una señal exponencial escalada por un factor que depende únicamente de $z$. Por lo tanto, $z^{n}$ es un autovector del sistema, y su correspondiente autovalor es:
+    \begin{equation*}
+        H(z) := \sum_{n=-\infty}^{\infty} h(n)z^{-n}
+    \end{equation*}
+\end{property}
+
+\begin{property}[Respuesta a señales periódicas]
+    La respuesta de un sistema LTI a una señal periódica con desarrollo en serie de fourier 
+    \begin{equation*}
+        x(t) = \sum_{k=-\infty}^{\infty} a_k e^{-j\frac{2\pi}{T}kt}
+    \end{equation*}
+    es una señal periódica con desarrollo en serie de fourier 
+    \begin{equation*}
+        y(t) = \sum_{k=-\infty}^{\infty} b_k e^{-j\frac{2\pi}{T}kt}    
+    \end{equation*}
+    donde $b_k = H\left(e^{-j\frac{2\pi}{T}k}\right)a_k$.
+\end{property}
